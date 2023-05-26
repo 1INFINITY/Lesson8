@@ -69,14 +69,16 @@ class MainActivity : AppCompatActivity() {
         scaleBarOverlay.setCentred(true)
         scaleBarOverlay.setScaleBarOffset(dm.widthPixels / 2, 10)
         mapView.overlays.add(scaleBarOverlay)
-        addMarker()
+        addMarker(GeoPoint(55.794229, 37.700772), "MIREA №1")
+        addMarker(GeoPoint(55.670072, 37.479164), "MIREA №2")
+        addMarker(GeoPoint(55.731688, 37.574496), "MIREA №3")
     }
-    fun addMarker() {
+    fun addMarker(geoPoint: GeoPoint, text: String) {
         val marker = Marker(mapView)
-        marker.position = GeoPoint(55.794229, 37.700772)
+        marker.position = geoPoint
         marker.setOnMarkerClickListener { marker, mapView ->
             Toast.makeText(
-                applicationContext, "Click",
+                applicationContext, text,
                 Toast.LENGTH_SHORT
             ).show()
             true
@@ -86,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         marker.icon = ResourcesCompat.getDrawable(
             resources, org.osmdroid.library.R.drawable.osm_ic_follow_me_on, null)
 
-        marker.title = "Title"
+        marker.title = text
     }
     override fun onRequestPermissionsResult(
         requestCode: Int,
